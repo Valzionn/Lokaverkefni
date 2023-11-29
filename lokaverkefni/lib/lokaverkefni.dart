@@ -1,14 +1,15 @@
 import 'dart:io';
 
-class Player {
-  
-}
+class Player {}
 
 class Garfield {
   String? food;
   String? ingredients;
   String? place;
   String? rooms;
+  String? blurv;
+
+  Garfield({this.food, this.ingredients, this.place, this.rooms, this.blurv});
 }
 
 List<String> food = [
@@ -35,12 +36,13 @@ List<String> ingredients = [
   'Lasagna Noodles',
   'Cheese'
 ];
- 
-List<String> place = [
 
-];
+List<String> place = [];
 
-
-void main() {
-  print('You\'re the new cat on the block, and you hear through an open window cries for help');
+void main(_Garfield) {
+  print(
+      'You\'re the new cat on the block, and you hear through an open window cries for help, \nit\'s old Garfield, "What\'s Wrong?" you ask, He replies "Jon has left me home alone, on a monday! and there\'s nothing to eat!" \n');
+  print(
+      'What would you like to do? type: Help to help Garfield, and No to leave him to fend for himself ---------');
+  stdin.readLineSync();
 }
