@@ -9,6 +9,7 @@
             "cwd": "lokaverkefni",
             "request": "launch",
             "type": "dart"
+            "program": "lokaverkefni.dart"
         }
     ]
 }
