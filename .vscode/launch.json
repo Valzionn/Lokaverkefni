@@ -5,11 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Dart",
+            "type": "dart",
+            "request": "launch",
+            "program": "bin/lokaverkefni.dart"
+        },
+        {
             "name": "lokaverkefni",
             "cwd": "lokaverkefni",
             "request": "launch",
             "type": "dart"
-            "program": "lokaverkefni.dart"
-        }
+        },
     ]
 }

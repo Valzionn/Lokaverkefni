@@ -83,6 +83,11 @@ class Restaurants {
 */
 
 void main(/*_Garfield*/) {
+  print('You wake suddenly to a lion\'s roar, no wait it was your stomach rumbling \n ugh, mondays!,(button?) you roll out of bed and walk to the kitchen');
+  print('huh, this is strange, Jon\'s not home, and there\'s nothing to eat!');
+  print('I know what I have to do, but I don\'t know if I  have the strength to do it');
+  print('You\'ve thought up a plan, you will have to make your own lasagna to survive this monday!');
+
   Garfield garfield = Garfield(3, []);
 
   List<Places> buildings = [
