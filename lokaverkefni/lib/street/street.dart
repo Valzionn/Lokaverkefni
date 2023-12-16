@@ -1,1 +1,0 @@
-hérna kemur hubbið

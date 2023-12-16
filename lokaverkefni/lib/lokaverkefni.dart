@@ -33,17 +33,6 @@ class Garfield {
   }
 }
 
-/*
-class Garfield {
-  String? food;
-  String? ingredients;
-  String? place;
-  String? rooms;
-  String? blurv;
-
-  Garfield({this.food, this.ingredients, this.place, this.rooms, this.blurv});
-}
-*/
 class Places {
   String buildings;
   String ingredients;
@@ -59,28 +48,6 @@ class Places {
     garfield.findFood(food);
   }
 }
-/*
-class Restaurants {
-  List<String> food = [
-  'Hot Dogs',
-  'Pepperoni Pizza',
-  'Hamburger',
-  'Ice Cream',
-  'Meatloaf',
-  'Steak',
-  'Spaghetti',
-  'raisins',
-  'Fruit Cake',
-  'Spinach',
-  'Yoghurt'
-  'Anchovies'
-  ];
-
-  // if food 0 to 8 = restores life, sustains the Garf
-  // if food 9 to 13 = stomach problems = vet visit
-
-}
-*/
 
 void main(/*_Garfield*/) {
   print('You wake suddenly to a lion\'s roar, no wait it was your stomach rumbling \n ugh, mondays!,(button?) you roll out of bed and walk to the kitchen');
@@ -88,7 +55,7 @@ void main(/*_Garfield*/) {
   print('I know what I have to do, but I don\'t know if I  have the strength to do it');
   print('You\'ve thought up a plan, you will have to make your own lasagna to survive this monday!');
 
-  Garfield garfield = Garfield(3, []);
+  Garfield garfield = Garfield(5, []);
 
   List<Places> buildings = [
     Places('Steakhouse', 'Salt and Pepper', ['Steak', 'Fruit Cake']),
@@ -123,6 +90,7 @@ void main(/*_Garfield*/) {
     print(
         "You can't move any further, and are being taken to see Liz (the vet)");
   }
+}
 /*
   List<String> ingredients = [
   'Ground Beef',
@@ -175,4 +143,38 @@ switch(searchHotDogStand) {
   lives = 0 = loss (vet visit)
   }
 */
+
+/*
+class Garfield {
+  String? food;
+  String? ingredients;
+  String? place;
+  String? rooms;
+  String? blurv;
+
+  Garfield({this.food, this.ingredients, this.place, this.rooms, this.blurv});
 }
+*/
+
+/*
+class Restaurants {
+  List<String> food = [
+  'Hot Dogs',
+  'Pepperoni Pizza',
+  'Hamburger',
+  'Ice Cream',
+  'Meatloaf',
+  'Steak',
+  'Spaghetti',
+  'raisins',
+  'Fruit Cake',
+  'Spinach',
+  'Yoghurt'
+  'Anchovies'
+  ];
+
+  // if food 0 to 8 = restores life, sustains the Garf
+  // if food 9 to 13 = stomach problems = vet visit
+
+}
+*/

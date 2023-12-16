@@ -1,1 +1,0 @@
-þarf ég þennan fæl?
