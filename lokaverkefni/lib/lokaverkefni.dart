@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 
 class Garfield {
   List<String> imaginaryBackpack = [];
@@ -34,14 +35,14 @@ class Garfield {
 }
 
 class Places {
-  String buildings;
+  String name;
   String ingredients;
   List<String> foods;
 
-  Places(this.buildings, this.ingredients, this.foods);
+  Places(this.name, this.ingredients, this.foods);
 
   void searchPlace(Garfield garfield) {
-    print('You enter $buildings and start searching for what you need.');
+    print('You enter $name and start searching for what you need.');
     garfield.imaginaryBackpack.add(ingredients);
     print('You found $ingredients!!');
     String food = foods[Random().nextInt(foods.length)];
@@ -49,11 +50,18 @@ class Places {
   }
 }
 
-void main(/*_Garfield*/) {
-  print('You wake suddenly to a lion\'s roar, no wait it was your stomach rumbling \n ugh, mondays!,(button?) you roll out of bed and walk to the kitchen');
-  print('huh, this is strange, Jon\'s not home, and there\'s nothing to eat!');
-  print('I know what I have to do, but I don\'t know if I  have the strength to do it');
-  print('You\'ve thought up a plan, you will have to make your own lasagna to survive this monday!');
+class GarfieldAppScreen extends StatefulWidget {
+  @override
+  _GarfieldApp createState() => _GarfieldApp();
+}
+
+//void main(/*_Garfield*/) {
+  //print('You wake suddenly to a lion\'s roar, no wait it was your stomach rumbling \n ugh, mondays!,(button?) you roll out of bed and walk to the kitchen');
+  //print('huh, this is strange, Jon\'s not home, and there\'s nothing to eat!');
+  //print('I know what I have to do, but I don\'t know if I  have the strength to do it');
+  //print('You\'ve thought up a plan, you will have to make your own lasagna to survive this monday!');
+
+  class _GarfieldApp extends State<GarfieldAppScreen> {
 
   Garfield garfield = Garfield(5, []);
 
@@ -64,7 +72,63 @@ void main(/*_Garfield*/) {
     Places('Ice Cream Cart', 'Cheese', ['Ice Cream', 'Yoghurt']),
     Places('Vito\'s pizza', 'Ground Beef', ['Pepperoni Pizza', 'Anchovies'])
   ];
+  
+ int currentLocation = 0;
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Garfield\'s Monady Madness'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Center(
+              child: Text(
+                'You wake suddenly to a lion\'s roar, no wait it was your stomach rumbling \n ugh, mondays!,(button?) you roll out of bed and walk to the kitchen'
+                'huh, this is strange, Jon\'s not home, and there\'s nothing to eat!'
+                'I know what I have to do, but I don\'t know if I  have the strength to do it \n'
+                'You\'ve thought up a plan, you will have to make your own lasagna to survive this monday! \n'
+                'Right now you are at: ${buildings[currentLocation].name} \n'
+                'Stamina: ${garfield.stamina}',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18),
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: List.generate(
+            buildings.length,
+            (index) => ElevatedButton(
+              onPressed: () {
+
+                setState(() {
+                  buildings[index].searchPlace(garfield);
+                    if (Random().nextBool()) {
+                      print('Nermal is here to annoy you!');
+                      garfield.stamina -= Random().nextInt(2) +1;
+                      if (!garfield.canMove()) {
+                        print('you are exhausted, get taken to Liz(the vet)');
+                        return;
+                      }
+                    }
+                    currentLocation = index;
+                  });
+                },
+                child: Text('Restaurant $index'),
+              ),
+            ),
+          )
+        ],
+      ),  
+    );
+  }
+}
+
+/*
   while (garfield.canMove() && !garfield.winnerWinnerLasagnaDinner()) {
     String? choice = stdin.readLineSync();
     int index = int.tryParse(choice ?? '') ?? 0;
@@ -90,7 +154,18 @@ void main(/*_Garfield*/) {
     print(
         "You can't move any further, and are being taken to see Liz (the vet)");
   }
+  }
 }
+*/
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: GarfieldAppScreen(),
+    ),
+  );
+}
+
 /*
   List<String> ingredients = [
   'Ground Beef',
