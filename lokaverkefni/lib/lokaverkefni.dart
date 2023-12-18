@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class Garfield {
   List<String> imaginaryBackpack = [];
-  int stamina = 5;
+  int stamina = 10;
 
   Garfield(this.stamina, this.imaginaryBackpack);
 
@@ -63,7 +63,7 @@ class GarfieldAppScreen extends StatefulWidget {
 
   class _GarfieldApp extends State<GarfieldAppScreen> {
 
-  Garfield garfield = Garfield(5, []);
+  Garfield garfield = Garfield(10, []);
 
   List<Places> buildings = [
     Places('Steakhouse', 'Salt and Pepper', ['Steak', 'Fruit Cake']),
@@ -79,7 +79,7 @@ class GarfieldAppScreen extends StatefulWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Garfield\'s Monady Madness'),
+        title: Text('Garfield\'s Monday Madness'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
