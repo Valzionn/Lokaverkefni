@@ -4,6 +4,21 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 class Garfield {
+  int stamina = 10;
+  List<String> imaginaryBackpack;
+
+  Garfield(this.stamina) : imaginaryBackpack = [];
+
+  bool winnerWinnerLasagnaDinner() => ListEquality()
+      .equals(imaginaryBackpack, [
+        'Ground Beef',
+        'Salt and Pepper',
+        'Pastasauce',
+        'Lasagna Noodles',
+        'Cheese']);
+
+  bool canMove() => stamina > 0;
+  /*
   List<String> imaginaryBackpack = [];
   int stamina = 10;
 
@@ -17,9 +32,10 @@ class Garfield {
         'Lasagna Noodles',
         'Cheese'
       ]);
-
+*/
   void findFood(String food) {
-    print('you found $food!');
+    String message;
+    //print('you found $food!');
     if (food == 'Hot Dogs' || food == 'Pepperoni Pizza') {
       int staminaRestored = Random().nextInt(2) + 1;
       stamina += staminaRestored;
