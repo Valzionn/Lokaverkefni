@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'garf_menu.dart';
 
 void main() {
-  runApp(GarfApp));
+  runApp(GarfApp());
 }
 
 class GarfApp extends StatelessWidget {
