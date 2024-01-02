@@ -6,6 +6,9 @@
       <excludeFolder url="file://$MODULE_DIR$/lokaverkefni/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/lokaverkefni/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/lokaverkefni/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lokaverkefni/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/lokaverkefni/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lokaverkefni/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
