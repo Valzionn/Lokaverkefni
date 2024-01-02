@@ -11,6 +11,7 @@ class GarfApp extends StatelessWidget {
     return MaterialApp(
       title: 'Garfield\'s Monday Madness',
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.transparent,
         primarySwatch: Colors.orange,
       ),
       home: GarfMenu(),
