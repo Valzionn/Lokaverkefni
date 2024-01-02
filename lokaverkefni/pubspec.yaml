@@ -18,5 +18,5 @@ dev_dependencies:
 
 flutter:
   assets:
-    - lokaverkefni\lib\assets\garf_ background.jpg
-    - lokaverkefni\lib\assets\garf_win.png
+    - assets/garf_ background.jpg
+    - assets/garf_win.png
