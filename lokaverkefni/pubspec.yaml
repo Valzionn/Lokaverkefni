@@ -13,10 +13,10 @@ dependencies:
   # path: ^1.8.0
 
 dev_dependencies:
-  lints: ^2.0.0
+  lints: ^3.0.0
   test: ^1.21.0
 
 flutter:
   assets:
-    - assets/garf_background.jpg
-    - assets/garf_win.png
+    - lib/assets/garf_background.jpg
+    - lib/assets/garf_win.png
