@@ -18,5 +18,5 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/garf_ background.jpg
+    - assets/garf_background.jpg
     - assets/garf_win.png
