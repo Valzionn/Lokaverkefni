@@ -9,13 +9,13 @@ class Garfield {
 
   Garfield(this.stamina) : imaginaryBackpack = [];
 
-  bool winnerWinnerLasagnaDinner() => ListEquality()
-      .equals(imaginaryBackpack, [
+  bool winnerWinnerLasagnaDinner() => ListEquality().equals(imaginaryBackpack, [
         'Ground Beef',
         'Salt and Pepper',
         'Pastasauce',
         'Lasagna Noodles',
-        'Cheese']);
+        'Cheese'
+      ]);
 
   bool canMove() => stamina > 0;
 
@@ -47,7 +47,8 @@ class Places {
   Places(this.name, this.ingredients, this.foods, this.description);
 
   List<String> searchHouse(Garfield garfield) {
-    List<String>  messages = [];
+    List<String> messages = [];
+
     if (!hasBeenSearched) {
       messages.add("You look around $name.");
 
@@ -80,8 +81,6 @@ class GarfGame extends StatefulWidget {
   _GarfieldApp createState() => _GarfieldApp();
 }
 
-
-
 class _GarfieldApp extends State<GarfGame> {
   final List<String> _messages = [];
   final TextEditingController _controller = TextEditingController();
@@ -96,14 +95,17 @@ class _GarfieldApp extends State<GarfGame> {
   Garfield garfield = Garfield(10);
 
   List<Places> buildings = [
-    Places('Steakhouse', 'Salt and Pepper', ['Steak', 'Fruit Cake'],'mmm, smells like '),
-    Places('Hot Dog Trailer', 'Lasagna Noodles', ['Hot Dogs', 'Spinach'],''),
-    Places('Burger Joint', 'Pastasauce', ['Hamburger', 'Raisins'],''),
-    Places('Ice Cream Cart', 'Cheese', ['Ice Cream', 'Yoghurt'],''),
-    Places('Vito\'s pizza', 'Ground Beef', ['Pepperoni Pizza', 'Anchovies'],'')
+    Places('Steakhouse', 'Salt and Pepper', ['Steak', 'Fruit Cake'],
+        'mmm, smells like '),
+    Places('Hot Dog Trailer', 'Lasagna Noodles', ['Hot Dogs', 'Spinach'], ''),
+    Places('Burger Joint', 'Pastasauce', ['Hamburger', 'Raisins'], ''),
+    Places('Ice Cream Cart', 'Cheese', ['Ice Cream', 'Yoghurt'], ''),
+    Places('Vito\'s pizza', 'Ground Beef', ['Pepperoni Pizza', 'Anchovies'], '')
   ];
 
-  final Places hub = Places('711 Maple Street', '', [], 'You better hurry and find something to eat');
+  final Places hub = Places(
+      '711 Maple Street', '', [],
+       'You better hurry and find something to eat');
 
   @override
   void initState() {
@@ -112,30 +114,28 @@ class _GarfieldApp extends State<GarfGame> {
     currentLocation = 0;
   }
 
- int currentLocation = 0;
+  int currentLocation = 0;
 
   void _processInput(String input) {
     List<String> parts = input.toLowerCase().split('  ');
 
     switch (parts[0]) {
-      case 'search' :
+      case 'search':
         _messages.addAll(buildings[currentLocation].searchHouse(garfield));
         break;
-      case 'leave' :
+      case 'leave':
         _leaveHouse();
         break;
-      case 'enter' :
+      case 'enter':
         if (parts.length == 3 && parts[1] == 'house') {
           _enterHouse(parts[2]);
         } else {
-          _displayMessage(
-            'You might have entered that wrong, try again.');
+          _displayMessage('You might have entered that wrong, try again.');
         }
         break;
-      case 'status' :
+      case 'status':
         _displayMessage(
-          'Currently at: ${buildings[currentLocation].name}\n Stamina: ${garfield
-            .stamina}');
+            'Currently at: ${buildings[currentLocation].name}\n Stamina: ${garfield.stamina}');
         break;
       default:
         _displayMessage('Unknown command: $input');
@@ -150,7 +150,7 @@ class _GarfieldApp extends State<GarfGame> {
       index = int.parse(target);
     } catch (e) {
       index = buildings.indexWhere(
-              (building) => building.name.toLowerCase() == target.toLowerCase());
+          (building) => building.name.toLowerCase() == target.toLowerCase());
     }
     if (index >= 0 && index < buildings.length) {
       currentLocation = index;
@@ -164,7 +164,8 @@ class _GarfieldApp extends State<GarfGame> {
   void _leaveHouse() {
     if (currentLocation != 0) {
       currentLocation = 0;
-      _displayMessage('You left the restaurant and returned to 711 Maple Street.');
+      _displayMessage(
+          'You left the restaurant and returned to 711 Maple Street.');
     } else {
       _displayMessage('You are already on 711 Maple Street');
     }
@@ -179,21 +180,19 @@ class _GarfieldApp extends State<GarfGame> {
 
   void _scrollToBottom() {
     _scrollController.animateTo(
-        0.0,
-        duration: Duration(milliseconds:200),
-        curve: Curves.easeOut,
+      0.0,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeOut,
     );
   }
 
   Widget _buildStaminaIcons(int stamina) {
     List<Widget> icons = [];
     for (int i = 0; i < stamina; i++) {
-      icons.add(
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal:2.0),
-          child: Icon(Icons.favorite, color: Colors.red),
-        )
-      );
+      icons.add(Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+        child: Icon(Icons.favorite, color: Colors.red),
+      ));
     }
     return Wrap(
       children: icons,
@@ -218,7 +217,7 @@ class _GarfieldApp extends State<GarfGame> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Current Location: ${buildings[currentLocation].name}',
-                    style: TextStyle(fontSize: 16)),
+                      style: TextStyle(fontSize: 16)),
                   SizedBox(height: 10),
                   Text('Stamina', style: TextStyle(fontSize: 16)),
                   _buildStaminaIcons(garfield.stamina),
@@ -235,39 +234,38 @@ class _GarfieldApp extends State<GarfGame> {
                 ),
                 Expanded(
                   child: ListView.builder(
-                  reverse: true,
-                  controller: _scrollController,
-                  itemCount: _messages.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(title: Text(_messages[index]));
-                },
-              ),
+                    reverse: true,
+                    controller: _scrollController,
+                    itemCount: _messages.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(title: Text(_messages[index]));
+                    },
+                  ),
+                ),
+                TextField(
+                  controller: _controller,
+                  onSubmitted: (value) {
+                    _processInput(value);
+                    _controller.clear();
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Enter Command',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ],
             ),
-            TextField(
-              controller: _controller,
-              onSubmitted: (value) {
-                _processInput(value);
-                _controller.clear();
-              },
-              decoration: InputDecoration(
-                labelText: 'Enter Command',
-                border: OutlineInputBorder(),
-              ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(
+              'Garfield has no food on a monday morning and Jon isn\'t home',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18),
             ),
-          ],
-        ),
-      ),
-      Expanded(
-        flex: 1,
-        child: Text(
-        'Garfield has no food on a monday morning and Jon isn\'t home',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18),
-        ),
-        ),
+          ),
         ],
       ),
     );
   }
 }
-

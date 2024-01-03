@@ -17,6 +17,11 @@ dev_dependencies:
   test: ^1.21.0
 
 flutter:
+  uses-material-design: true
+  fonts:
+    - family: SourceCodePro
+      fonts:
+        - asset: lib\assets\fonts\SourceCodePro-MediumItalic.ttf
   assets:
     - lib/assets/garf_background.jpg
     - lib/assets/garf_win.png

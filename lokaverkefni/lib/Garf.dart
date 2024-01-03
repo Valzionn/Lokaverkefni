@@ -11,11 +11,29 @@ class GarfApp extends StatelessWidget {
     return MaterialApp(
       title: 'Garfield\'s Monday Madness',
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.transparent,
         primarySwatch: Colors.orange,
+        fontFamily: 'SourceCodePro'
       ),
-      home: GarfMenu(),
+      home: BackgroundWrapper(child: GarfMenu()),
     );
   }
 }
 
+class BackgroundWrapper extends StatelessWidget {
+  final Widget child;
+
+  BackgroundWrapper({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('lib/assets/garf_background.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: child,
+    );
+  }
+}
