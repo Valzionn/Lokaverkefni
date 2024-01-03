@@ -8,8 +8,10 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-     flutter:
-         sdk: flutter
+  flutter:
+    sdk: flutter
+  collection: ^1.17.2
+  yaml: ^3.1.0
   # path: ^1.8.0
 
 dev_dependencies:
@@ -25,3 +27,5 @@ flutter:
   assets:
     - lib/assets/garf_background.jpg
     - lib/assets/garf_win.png
+    - lib/assets/stamina-icon-lasagna2.png
+    - lib/assets/garf_defeat.png

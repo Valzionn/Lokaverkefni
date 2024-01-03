@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Garf.dart';
+import 'garf.dart';
 import 'lokaverkefni.dart';
 
 class GarfMenu extends StatelessWidget {
