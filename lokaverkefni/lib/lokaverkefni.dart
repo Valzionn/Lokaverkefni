@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:lokaverkefni/Garf.dart';
 import 'package:lokaverkefni/garf_menu.dart';
@@ -103,12 +102,11 @@ class _GarfieldApp extends State<GarfGame> {
   List<Places> buildings = [
     Places('Steakhouse', 'Salt and Pepper', ['Steak', 'Fruit Cake'],
         'mmm, smells like '),
-    Places(
-        'Hot Dog Trailer', 'Lasagna Noodles', ['Hot Dogs', 'Spinach'], 'ooo'),
-    Places('Burger Joint', 'Pastasauce', ['Hamburger', 'Raisins'], 'ooooo'),
-    Places('Ice Cream Cart', 'Cheese', ['Ice Cream', 'Yoghurt'], 'ooooooo'),
+    Places('Hot Dog Trailer', 'Lasagna Noodles', ['Hot Dogs', 'Spinach'], 'mmm, even during siesta you can smell the deliciousness'),
+    Places('Burger Joint', 'Pastasauce', ['Hamburger', 'Raisins'], 'I can nearly taste the grease on the air, yum!'),
+    Places('Ice Cream Cart', 'Cheese', ['Ice Cream', 'Yoghurt'], "Can't get distracted by desserts"),
     Places('Vitos pizza', 'Ground Beef', ['Pepperoni Pizza', 'Anchovies'],
-        'ooooooooo')
+        "Ahhh, Vito's the greatest place on earth")
   ];
 
   final Places hub = Places(
@@ -119,6 +117,9 @@ class _GarfieldApp extends State<GarfGame> {
     super.initState();
     buildings.insert(0, hub);
     currentLocation = 0;
+
+    _messages.add(
+        " Garfield (You) has no food on a Monday morning and Jon isn't home \n ugh, Mondays.... \n he rolls out of bed and onto the street in search of food \n I'm in the mood for Lasagna and I won't rest 'till I've had some.");
   }
 
   int currentLocation = 0;
@@ -137,15 +138,15 @@ class _GarfieldApp extends State<GarfGame> {
           _showVictoryScreen();
         }
         if (!garfield.canMove()) {
-        _showLosingScreen(); // Show losing screen if Garfield is too exhausted
+          _showLosingScreen();
         }
         break;
       case 'leave':
         _leaveHouse();
         break;
       case 'enter':
-        if (parts.length == 3 && parts[1] == 'restaurant') {
-          _enterHouse(parts[2]);
+        if (parts.length == 2) {
+          _enterHouse(parts[1]);
         } else {
           _displayMessage('You might have entered that wrong, try again.');
         }
@@ -179,8 +180,7 @@ class _GarfieldApp extends State<GarfGame> {
                 Text(
                     "You've got all the ingredients and head home, Odie makes you lasagna!"),
                 SizedBox(height: 20),
-                Image.asset(
-                    'lib/assets/garf_win.png'), // Ensure this image path is correct
+                Image.asset('lib/assets/garf_win.png'),
               ],
             ),
           ),
@@ -188,7 +188,7 @@ class _GarfieldApp extends State<GarfGame> {
             TextButton(
               child: Text('Return to Menu'),
               onPressed: () {
-                Navigator.of(context).pop(); // Closes the dialog
+                Navigator.of(context).pop();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => GarfMenu()),
@@ -212,8 +212,7 @@ class _GarfieldApp extends State<GarfGame> {
               children: <Widget>[
                 Text('Oh no, Garfield is too exhausted to continue!'),
                 SizedBox(height: 20),
-                Image.asset(
-                    'lib/assets/garf_defeat.png'),
+                Image.asset('lib/assets/garf_defeat.png'),
               ],
             ),
           ),
@@ -221,7 +220,7 @@ class _GarfieldApp extends State<GarfGame> {
             TextButton(
               child: Text('Return to Menu'),
               onPressed: () {
-                Navigator.of(context).pop(); 
+                Navigator.of(context).pop();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => GarfMenu()),
@@ -235,14 +234,9 @@ class _GarfieldApp extends State<GarfGame> {
   }
 
   void _enterHouse(String target) {
-    int index = -1;
+    int index = buildings.indexWhere(
+        (building) => building.name.toLowerCase() == target.toLowerCase());
 
-    try {
-      index = int.parse(target);
-    } catch (e) {
-      index = buildings.indexWhere(
-          (building) => building.name.toLowerCase() == target.toLowerCase());
-    }
     if (index >= 0 && index < buildings.length) {
       currentLocation = index;
       _displayMessage('Entered ${buildings[currentLocation].name}.');
@@ -262,7 +256,31 @@ class _GarfieldApp extends State<GarfGame> {
     }
   }
 
+  Widget _buildLocationsList() {
+    List<Widget> widgets = [
+      Text('Available Locations:', style: TextStyle(fontSize: 16)),
+    ];
+
+    if (currentLocation == 0) {
+      widgets.addAll(buildings.getRange(1, buildings.length).map(
+            (location) => Padding(
+              padding: EdgeInsets.symmetric(vertical: 4.0),
+              child: Text(location.name, style: TextStyle(fontSize: 14)),
+            ),
+          ));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: widgets,
+    );
+  }
+
   void _displayMessage(String message) {
+    if (currentLocation == 0) {
+      message += "\nYou could enter one of the restaurants on the street.";
+    }
+
     setState(() {
       _messages.insert(0, message);
     });
@@ -284,16 +302,16 @@ class _GarfieldApp extends State<GarfGame> {
         padding: const EdgeInsets.symmetric(horizontal: 2.0),
         child: Image.asset(
           'lib/assets/stamina-icon-lasagna2.png',
-          width: 60, // Adjust the width as needed
-          height: 60, // Adjust the height as needed
-          fit: BoxFit.cover, // Adjust how the image fits within the widget
+          width: 60,
+          height: 60,
+          fit: BoxFit.cover,
         ),
       ));
     }
     return Wrap(
       children: icons,
-      spacing: 4.0, // Spacing between the icons horizontally
-      runSpacing: 4.0, // Spacing between the lines of icons
+      spacing: 4.0,
+      runSpacing: 4.0,
     );
   }
 
@@ -304,6 +322,7 @@ class _GarfieldApp extends State<GarfGame> {
         appBar: AppBar(
           title: Text('Garfield\'s Monday Madness'),
           backgroundColor: Colors.transparent,
+          centerTitle: true,
         ),
         backgroundColor: Colors.transparent,
         body: Row(
@@ -315,11 +334,29 @@ class _GarfieldApp extends State<GarfGame> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Current Location: ${buildings[currentLocation].name}',
-                        style: TextStyle(fontSize: 16)),
-                    SizedBox(height: 10),
-                    Text('Stamina', style: TextStyle(fontSize: 16)),
-                    _buildStaminaIcons(garfield.stamina),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                            'Current Location: ${buildings[currentLocation].name}',
+                            style: TextStyle(fontSize: 16)),
+                      ),
+                    ),
+                    Expanded(
+                      child: _buildLocationsList(),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          "To enter a restaurant, simply type -enter 'restaurant name'-.\n"
+                          "From there, you can use: -search-.\n"
+                          "To get back to the street, type -leave-.",
+                          style: TextStyle(
+                              fontSize: 14, fontStyle: FontStyle.italic),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -328,16 +365,19 @@ class _GarfieldApp extends State<GarfGame> {
               flex: 3,
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                  ),
                   Expanded(
                     child: ListView.builder(
                       reverse: true,
                       controller: _scrollController,
                       itemCount: _messages.length,
                       itemBuilder: (context, index) {
-                        return ListTile(title: Text(_messages[index]));
+                        return Padding(
+                          padding: EdgeInsets.symmetric(vertical: 1.0),
+                          child: ListTile(
+                            title: Text(_messages[index]),
+                            contentPadding: EdgeInsets.all(0),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -348,7 +388,7 @@ class _GarfieldApp extends State<GarfGame> {
                       _controller.clear();
                     },
                     decoration: InputDecoration(
-                      labelText: 'Enter Command',
+                      labelText: 'Type Here',
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -357,10 +397,15 @@ class _GarfieldApp extends State<GarfGame> {
             ),
             Expanded(
               flex: 1,
-              child: Text(
-                'Garfield has no food on a monday morning and Jon isn\'t home',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Stamina', style: TextStyle(fontSize: 16)),
+                    _buildStaminaIcons(garfield.stamina),
+                  ],
+                ),
               ),
             ),
           ],

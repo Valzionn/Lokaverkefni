@@ -8,9 +8,13 @@ class GarfMenu extends StatelessWidget {
     return BackgroundWrapper(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Garfield\'s Monday Madness'),
+          title: Text(
+            'Garfield\'s Monday Madness',
+            textAlign: TextAlign.center,
+          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
+          centerTitle: true,
         ),
         backgroundColor: Colors.transparent,
         body: Center(
